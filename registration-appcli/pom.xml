@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>registration-appcli</artifactId>
-	<name>Registration :: Command Line Application</name>
+	<name>Registration :: C/L Application</name>
 	<url>https://anrisoftware.com/projects/projects/registration-appcli</url>
 	<description>Command line application to generate the registration key and code.</description>
 	<inceptionYear>2015</inceptionYear>
@@ -19,6 +19,14 @@
 	<properties>
 		<project.custom.year>${project.inceptionYear}</project.custom.year>
 	</properties>
+
+    <licenses>
+        <license>
+            <name>GPLv3</name>
+            <url>http://www.gnu.org/licenses/gpl.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
 	<issueManagement>
 		<system>Redmine</system>
