@@ -16,16 +16,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with registration-appcli. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.registration.app;
+package com.anrisoftware.registration.appexceptions;
+
+import java.util.Arrays;
 
 /**
- * Generate code worker factory.
- *
- * @see GenerateCodeWorker
+ * Exception for parsing the command line.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-interface GenerateCodeWorkerFactory extends AppWorkerFactory {
+@SuppressWarnings("serial")
+public class ParseCommandLineException extends AppException {
 
+    public ParseCommandLineException(Object message, Throwable cause,
+            String[] args) {
+        super(message.toString(), cause);
+        addContextValue("arguments", Arrays.toString(args));
+    }
+
+    public ParseCommandLineException(Object message, String[] args) {
+        super(message.toString());
+        addContextValue("arguments", Arrays.toString(args));
+    }
 }

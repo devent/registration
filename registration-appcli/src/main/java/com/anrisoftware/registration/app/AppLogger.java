@@ -19,10 +19,16 @@
 package com.anrisoftware.registration.app;
 
 import static com.anrisoftware.registration.app.AppLogger._.error_parse_command_line;
+import static com.anrisoftware.registration.app.AppLogger._.error_print_help;
+import static com.anrisoftware.registration.app.AppLogger._.error_worker;
+import static com.anrisoftware.registration.app.AppLogger._.nothing_specified;
 
 import org.kohsuke.args4j.CmdLineException;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
+import com.anrisoftware.registration.appexceptions.AppException;
+import com.anrisoftware.registration.appexceptions.ParseCommandLineException;
+import com.anrisoftware.registration.workers.AppWorker;
 
 /**
  * Logging for {@link App}.
@@ -32,9 +38,17 @@ import com.anrisoftware.globalpom.log.AbstractLogger;
  */
 class AppLogger extends AbstractLogger {
 
+    private static final String THE_WORKER = "worker";
+
     enum _ {
 
-        error_parse_command_line("Error parse command line");
+        error_parse_command_line("Error parse command line"),
+
+        nothing_specified("Nothing specified"),
+
+        error_worker("Error application"),
+
+        error_print_help("Error print help");
 
         private String name;
 
@@ -58,5 +72,17 @@ class AppLogger extends AbstractLogger {
     ParseCommandLineException errorParseCommandLine(CmdLineException e,
             String[] args) {
         return new ParseCommandLineException(error_parse_command_line, e, args);
+    }
+
+    ParseCommandLineException nothingSpecified(String[] args) {
+        return new ParseCommandLineException(nothing_specified, args);
+    }
+
+    AppException errorAppWorker(Exception e, AppWorker worker) {
+        return new AppException(error_worker, e).add(THE_WORKER, worker);
+    }
+
+    AppException errorPrintHelp(Exception e) {
+        return new AppException(error_print_help, e);
     }
 }

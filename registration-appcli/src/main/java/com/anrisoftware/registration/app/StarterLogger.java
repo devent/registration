@@ -18,27 +18,30 @@
  */
 package com.anrisoftware.registration.app;
 
+import com.anrisoftware.globalpom.log.AbstractLogger;
+import com.anrisoftware.registration.appexceptions.AppException;
+import com.anrisoftware.registration.appexceptions.ParseCommandLineException;
+
 /**
- * The registration application command line arguments.
+ * Logging for {@link Starter}.
  *
- * @author Erwin Müller, erwin.mueller@deventm.de
+ * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
-public interface AppCommandLine {
+final class StarterLogger extends AbstractLogger {
 
     /**
-     * @return the {@link String} name.
+     * Sets the context of the logger to {@link Starter}.
      */
-    public String getName();
+    public StarterLogger() {
+        super(Starter.class);
+    }
 
-    /**
-     * @return the {@link String} email.
-     */
-    public String getEmail();
+    void errorParseCommandLine(ParseCommandLineException e) {
+        log.error(e.getLocalizedMessage(), e);
+    }
 
-    /**
-     * @return the {@link String} key.
-     */
-    public String getKey();
-
+    void errorApp(AppException e) {
+        log.error(e.getLocalizedMessage(), e);
+    }
 }

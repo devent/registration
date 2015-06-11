@@ -24,6 +24,12 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
+import com.anrisoftware.registration.commandline.AppCommandLine;
+import com.anrisoftware.registration.help.AppHelpFactory;
+import com.anrisoftware.registration.workers.AppWorkerFactory;
+import com.anrisoftware.registration.workers.GenerateCodeWorkerFactory;
+import com.anrisoftware.registration.workers.GenerateKeyWorkerFactory;
+
 /**
  * Parses the registration application command line arguments.
  *
@@ -38,22 +44,33 @@ final class AppCommandLineParser implements AppCommandLine {
 
     static final String NAME_ARG = "-name";
 
+    static final String HELP_ARG = "-help";
+
     @Inject
     private GenerateCodeWorkerFactory generateCodeWorkerFactory;
 
     @Inject
     private GenerateKeyWorkerFactory generateKeyWorkerFactory;
 
-    @Option(name = NAME_ARG, required = true, depends = { EMAIL_ARG })
+    @Inject
+    private AppHelpFactory appHelpFactory;
+
+    @Option(name = NAME_ARG, depends = { EMAIL_ARG })
     private String name;
 
-    @Option(name = EMAIL_ARG, required = true, depends = { NAME_ARG })
+    @Option(name = EMAIL_ARG, depends = { NAME_ARG })
     private String email;
 
-    @Option(name = KEY_ARG, required = true, forbids = { NAME_ARG, EMAIL_ARG })
+    @Option(name = KEY_ARG, forbids = { NAME_ARG, EMAIL_ARG })
     private String key;
 
+    private boolean help;
+
     private AppWorkerFactory workerFactory;
+
+    AppCommandLineParser() {
+        this.help = false;
+    }
 
     /**
      * Parses the command line arguments.
@@ -68,10 +85,11 @@ final class AppCommandLineParser implements AppCommandLine {
      */
     public AppCommandLineParser parse(String[] args) throws CmdLineException {
         new CmdLineParser(this).parseArgument(args);
-        if (isGenerateKey()) {
+        if (help) {
+            this.workerFactory = appHelpFactory;
+        } else if (isGenerateKey()) {
             this.workerFactory = generateKeyWorkerFactory;
-        }
-        if (isGenerateCode()) {
+        } else if (isGenerateCode()) {
             this.workerFactory = generateCodeWorkerFactory;
         }
         return this;
@@ -92,16 +110,21 @@ final class AppCommandLineParser implements AppCommandLine {
         return key;
     }
 
+    @Option(name = HELP_ARG, forbids = { NAME_ARG, EMAIL_ARG, KEY_ARG })
+    public void setHelp(boolean help) {
+        this.help = help;
+    }
+
     public AppWorkerFactory getWorkerFactory() {
         return workerFactory;
     }
 
     private boolean isGenerateCode() {
-        return key == null;
+        return key != null;
     }
 
     private boolean isGenerateKey() {
-        return key != null;
+        return key == null;
     }
 
 }

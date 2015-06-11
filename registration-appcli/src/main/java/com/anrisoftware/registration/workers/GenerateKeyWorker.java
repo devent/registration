@@ -16,43 +16,40 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with registration-appcli. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.registration.app;
+package com.anrisoftware.registration.workers;
 
 import javax.inject.Inject;
 
-import com.anrisoftware.registration.codegenerator.CodeGeneratorFactory;
+import com.anrisoftware.registration.commandline.AppCommandLine;
+import com.anrisoftware.registration.keygenerator.KeyGeneratorFactory;
 import com.google.inject.assistedinject.Assisted;
 
 /**
- * Generates the registration code.
+ * Generates the key.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-final class GenerateCodeWorker implements AppWorker {
-
-    private final AppCommandLineParser commandLine;
+public final class GenerateKeyWorker implements AppWorker {
 
     private final Appendable output;
 
     @Inject
-    private CodeGeneratorFactory codeGeneratorFactory;
+    private KeyGeneratorFactory keyGeneratorFactory;
 
     /**
-     * @see AppWorkerFactory#create(AppCommandLineParser, Appendable)
+     * @see AppWorkerFactory#create(AppCommandLine, Appendable)
      */
     @Inject
-    GenerateCodeWorker(@Assisted AppCommandLineParser commandLine,
+    GenerateKeyWorker(@Assisted AppCommandLine commandLine,
             @Assisted Appendable output) {
-        this.commandLine = commandLine;
         this.output = output;
     }
 
     @Override
     public Appendable call() throws Exception {
-        String key = commandLine.getKey();
-        String code = codeGeneratorFactory.create(key).generateCode();
-        output.append(code);
+        String key = keyGeneratorFactory.create().generateKey();
+        output.append(key);
         return output;
     }
 

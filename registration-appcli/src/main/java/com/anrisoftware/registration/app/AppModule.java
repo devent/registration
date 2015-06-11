@@ -20,12 +20,13 @@ package com.anrisoftware.registration.app;
 
 import com.anrisoftware.registration.codegenerator.CodeGeneratorModule;
 import com.anrisoftware.registration.data.RegistrationDataModule;
+import com.anrisoftware.registration.help.AppHelpModule;
 import com.anrisoftware.registration.keygenerator.KeyGeneratorModule;
+import com.anrisoftware.registration.workers.AppWorkersModule;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
  * Installs the registration command line application.
@@ -44,9 +45,19 @@ public class AppModule extends AbstractModule {
         return SingletonHolder.app;
     }
 
+    /**
+     * Returns the registration command line application Guice injector,
+     *
+     * @return the {@link Injector}.
+     */
+    public static Injector getInjector() {
+        return SingletonHolder.injector;
+    }
+
     private static class SingletonHolder {
 
         private static final Module[] modules = new Module[] { new AppModule(),
+                new AppWorkersModule(), new AppHelpModule(),
                 new CodeGeneratorModule(), new RegistrationDataModule(),
                 new KeyGeneratorModule() };
 
@@ -58,11 +69,6 @@ public class AppModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        install(new FactoryModuleBuilder().implement(AppWorker.class,
-                GenerateKeyWorker.class).build(GenerateKeyWorkerFactory.class));
-        install(new FactoryModuleBuilder().implement(AppWorker.class,
-                GenerateCodeWorker.class)
-                .build(GenerateCodeWorkerFactory.class));
     }
 
 }

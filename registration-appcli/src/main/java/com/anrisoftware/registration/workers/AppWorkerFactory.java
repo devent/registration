@@ -16,15 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with registration-appcli. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.registration.app;
+package com.anrisoftware.registration.workers;
 
-/**
- * Generate key worker factory.
- *
- * @see GenerateKeyWorker
- *
- * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 1.0
- */
-interface GenerateKeyWorkerFactory extends AppWorkerFactory {
+import com.anrisoftware.registration.commandline.AppCommandLine;
+
+public interface AppWorkerFactory {
+
+    AppWorker create(AppCommandLine commandLine, Appendable output);
 }

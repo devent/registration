@@ -19,19 +19,72 @@
 package com.anrisoftware.registration.app
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
+import groovy.util.logging.Slf4j
 
 import org.junit.BeforeClass
 import org.junit.Test
 
 import com.google.inject.Injector
 
+/**
+ * @see App
+ *
+ * @author Erwin Müller, erwin.mueller@deventm.de
+ * @since 1.0
+ */
+@Slf4j
 class AppTest {
 
     @Test
     void "app test"() {
         def cases = [
-            [args: [], expectedOutput: ""],
+            [
+                args: [],
+                expectedOutputPattern: /\w{4}-\w{4}-\w{4}-\w{4}/,
+                expectedException: null
+            ],
+            [
+                args: [
+                    "-name",
+                    "Erwin",
+                    "-email",
+                    "test"
+                ],
+                expectedOutputPattern: /\w{4}-\w{4}-\w{4}-\w{4}/,
+                expectedException: null
+            ],
+            [
+                args: [
+                    "-key",
+                    "BNTH-OOSR-LNRS-YHCF"
+                ],
+                expectedOutputPattern: /3674448096080427/,
+                expectedException: null
+            ],
+            [
+                args: [
+                    "-help"
+                ],
+                expectedOutputPattern: /Description.*/,
+                expectedException: null
+            ],
         ]
+        cases.eachWithIndex { testCase, i ->
+            def output = new StringBuilder()
+            App app = injector.getInstance App
+            app.setOutput output
+
+            if (testCase.expectedException == null) {
+                app.start(testCase.args as String[])
+                log.info "{}.test case: {} output: '{}'", i, testCase, output.toString()
+                assert output.toString() =~ testCase.expectedOutputPattern
+            } else {
+                log.info "{}.test case: {}", i, testCase
+                shouldFailWith(testCase.expectedException, {
+                    app.start(testCase.args as String[])
+                })
+            }
+        }
     }
 
     static Injector injector

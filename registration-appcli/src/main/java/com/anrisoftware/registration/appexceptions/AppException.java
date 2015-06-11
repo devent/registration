@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with registration-appcli. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.registration.app;
+package com.anrisoftware.registration.appexceptions;
 
 import org.apache.commons.lang3.exception.ContextedException;
 import org.apache.commons.lang3.exception.ExceptionContext;

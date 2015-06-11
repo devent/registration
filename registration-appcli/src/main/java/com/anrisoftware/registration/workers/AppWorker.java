@@ -16,9 +16,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with registration-appcli. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.registration.app;
+package com.anrisoftware.registration.workers;
 
-public interface AppWorkerFactory {
+import java.util.concurrent.Callable;
 
-    AppWorker create(AppCommandLineParser commandLine, Appendable output);
+/**
+ * Worker of the application, after finishing the output is written into the
+ * {@link Appendable} object.
+ *
+ * @author Erwin Müller, erwin.mueller@deventm.de
+ * @since 1.0
+ */
+public interface AppWorker extends Callable<Appendable> {
+
+    /**
+     * Do the work of the application, after finishing the output is written
+     * into the {@link Appendable} object.
+     */
+    @Override
+    Appendable call() throws Exception;
 }

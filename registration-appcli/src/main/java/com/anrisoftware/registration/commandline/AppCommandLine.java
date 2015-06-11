@@ -16,22 +16,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with registration-appcli. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.registration.app;
-
-import java.util.Arrays;
+package com.anrisoftware.registration.commandline;
 
 /**
- * Exception for parsing the command line.
+ * The registration application command line arguments.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-@SuppressWarnings("serial")
-public class ParseCommandLineException extends AppException {
+public interface AppCommandLine {
 
-    public ParseCommandLineException(Object message, Throwable cause,
-            String[] args) {
-        super(message.toString(), cause);
-        addContextValue("arguments", Arrays.toString(args));
-    }
+    /**
+     * @return the {@link String} name.
+     */
+    public String getName();
+
+    /**
+     * @return the {@link String} email.
+     */
+    public String getEmail();
+
+    /**
+     * @return the {@link String} key.
+     */
+    public String getKey();
+
 }

@@ -16,23 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with registration-appcli. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.registration.app;
+package com.anrisoftware.registration.help;
 
-import java.util.concurrent.Callable;
+import com.anrisoftware.registration.workers.AppWorkerFactory;
 
 /**
- * Worker of the application, after finishing the output is written into the
- * {@link Appendable} object.
+ * Factory to create the application help printer.
  *
- * @author Erwin Müller, erwin.mueller@deventm.de
+ * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
-public interface AppWorker extends Callable<Appendable> {
-
-    /**
-     * Do the work of the application, after finishing the output is written
-     * into the {@link Appendable} object.
-     */
-    @Override
-    Appendable call() throws Exception;
+public interface AppHelpFactory extends AppWorkerFactory {
 }

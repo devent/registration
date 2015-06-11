@@ -18,13 +18,22 @@
  */
 package com.anrisoftware.registration.app;
 
+import javax.inject.Inject;
+
+import com.anrisoftware.registration.appexceptions.AppException;
+import com.anrisoftware.registration.appexceptions.ParseCommandLineException;
+import com.google.inject.Injector;
+
 /**
  * Starts the application to generate the registration key and code.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public class Starter {
+public final class Starter {
+
+    @Inject
+    private StarterLogger log;
 
     /**
      * Starts the application to generate the registration key and code.
@@ -33,15 +42,28 @@ public class Starter {
      *            the command line arguments.
      */
     public static void main(String[] args) {
+        Injector injector = AppModule.getInjector();
+        Starter starter = injector.getInstance(Starter.class);
+        starter.doStart(args);
+    }
+
+    private void doStart(String[] args) {
         App app = AppModule.getApp();
         try {
             app.start(args);
         } catch (ParseCommandLineException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.errorParseCommandLine(e);
+            printHelp(app);
         } catch (AppException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.errorApp(e);
+        }
+    }
+
+    private void printHelp(App app) {
+        try {
+            app.printHelp();
+        } catch (AppException e1) {
+            log.errorApp(e1);
         }
     }
 }

@@ -22,6 +22,12 @@ import javax.inject.Inject;
 
 import org.kohsuke.args4j.CmdLineException;
 
+import com.anrisoftware.registration.appexceptions.AppException;
+import com.anrisoftware.registration.appexceptions.ParseCommandLineException;
+import com.anrisoftware.registration.help.AppHelpFactory;
+import com.anrisoftware.registration.workers.AppWorker;
+import com.anrisoftware.registration.workers.AppWorkerFactory;
+
 /**
  * Application to generate the registration key and code.
  *
@@ -35,6 +41,9 @@ final class App {
 
     @Inject
     private AppCommandLineParser commandLine;
+
+    @Inject
+    private AppHelpFactory helpFactory;
 
     private Appendable output;
 
@@ -53,8 +62,34 @@ final class App {
      */
     public void start(String[] args) throws AppException {
         parseCommandLine(args);
+        startWorker(args);
+    }
+
+    /**
+     * Prints the help to the output.
+     *
+     * @throws AppException
+     *             if there was an error printing the help.
+     */
+    public void printHelp() throws AppException {
+        try {
+            helpFactory.create(commandLine, output).call();
+        } catch (Exception e) {
+            throw log.errorPrintHelp(e);
+        }
+    }
+
+    private void startWorker(String[] args) throws AppException {
         AppWorkerFactory workerFactory = commandLine.getWorkerFactory();
-        workerFactory.create(commandLine, output);
+        if (workerFactory == null) {
+            throw log.nothingSpecified(args);
+        }
+        AppWorker worker = workerFactory.create(commandLine, output);
+        try {
+            worker.call();
+        } catch (Exception e) {
+            throw log.errorAppWorker(e, worker);
+        }
     }
 
     public void setOutput(Appendable output) {
@@ -69,4 +104,5 @@ final class App {
             throw log.errorParseCommandLine(e, args);
         }
     }
+
 }
