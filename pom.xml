@@ -11,6 +11,7 @@
     <modules>
         <module>registration-parent</module>
 	<module>registration-appcli</module>
+	<module>registration-appcli-install</module>
         <module>registration-core</module>
     </modules>
 

@@ -1,0 +1,60 @@
+~~
+~~ Copyright 2015 Erwin Müller <erwin.mueller@deventm.org>
+~~
+~~ This file is part of registration-appcli-install.
+~~
+~~ registration-appcli-install is free software: you can redistribute it and/or modify it
+~~ under the terms of the GNU General Public License as published by the Free
+~~ Software Foundation, either version 3 of the License, or (at your option) any
+~~ later version.
+~~
+~~ registration-appcli-install is distributed in the hope that it will be useful, but
+~~ WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+~~ FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+~~ details.
+~~
+~~ You should have received a copy of the GNU General Public License along with
+~~ registration-appcli-install. If not, see <http://www.gnu.org/licenses/>.
+~~
+
+Description
+
+    Packages the registration command line application for deployment and
+installation.
+
+    * registration-appcli-install-1.0-single-jar.jar
+
+    the application Jar executable file with all dependencies bundled;
+
+    * registration-appcli-install-1.0.jar
+
+    the installation Jar executable file;
+
+* Maven Build
+
+    To build the application and installation Jar executable file:
+
+---
+mvn package -P compile-izpack
+---
+
+    To build the application and installation Windows executable file:
+
+---
+mvn package -P make-install-exe
+mvn package -P make-exe
+---
+
+SCM
+
+* Main
+
+    * {{{https://anrisoftware.com/projects/projects/registration-code/repository}Repository}}
+
+    * git@anrisoftware.com:registration.git
+
+* GitHub
+
+    * {{{https://github.com/devent/registration}Repository}}
+
+    * git@github.com:devent/registration.git
