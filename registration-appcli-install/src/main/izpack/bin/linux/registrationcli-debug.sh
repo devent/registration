@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright 2015 Erwin Müller <erwin.mueller@deventm.org>
 #

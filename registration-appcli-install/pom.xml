@@ -24,7 +24,7 @@
 		<project.custom.author.email>erwin.mueller@deventm.org</project.custom.author.email>
 		<project.custom.app.name>Registration Command Line Application</project.custom.app.name>
 		<project.custom.app.description>Generates the registration key and code.</project.custom.app.description>
-		<project.custom.app.path>fractionscli</project.custom.app.path>
+		<project.custom.app.path>Registrationcli</project.custom.app.path>
 		<project.custom.app.version>1.0</project.custom.app.version>
 		<project.custom.app.author.name>Erwin Müller</project.custom.app.author.name>
 		<project.custom.app.author.email>erwin.mueller@deventm.org</project.custom.app.author.email>
