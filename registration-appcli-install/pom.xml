@@ -12,7 +12,7 @@
 
 	<groupId>com.anrisoftware.registration</groupId>
 	<artifactId>registration-appcli-install</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>Registration :: C/L Application Installation</name>
 	<description>Packages the registration command line application for deployment and installation.</description>
 	<inceptionYear>2015</inceptionYear>
@@ -121,7 +121,7 @@
 		<dependency>
 			<groupId>com.anrisoftware.registration</groupId>
 			<artifactId>registration-appcli</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 
