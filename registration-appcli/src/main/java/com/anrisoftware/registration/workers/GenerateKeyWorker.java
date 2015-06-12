@@ -32,6 +32,8 @@ import com.google.inject.assistedinject.Assisted;
  */
 public final class GenerateKeyWorker implements AppWorker {
 
+    private static final String NL = System.getProperty("line.separator");
+
     private final Appendable output;
 
     @Inject
@@ -50,6 +52,7 @@ public final class GenerateKeyWorker implements AppWorker {
     public Appendable call() throws Exception {
         String key = keyGeneratorFactory.create().generateKey();
         output.append(key);
+        output.append(NL);
         return output;
     }
 

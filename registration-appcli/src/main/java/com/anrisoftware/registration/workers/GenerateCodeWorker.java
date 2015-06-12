@@ -32,6 +32,8 @@ import com.google.inject.assistedinject.Assisted;
  */
 public final class GenerateCodeWorker implements AppWorker {
 
+    private static final String NL = System.getProperty("line.separator");
+
     private final AppCommandLine commandLine;
 
     private final Appendable output;
@@ -54,6 +56,7 @@ public final class GenerateCodeWorker implements AppWorker {
         String key = commandLine.getKey();
         String code = codeGeneratorFactory.create(key).generateCode();
         output.append(code);
+        output.append(NL);
         return output;
     }
 
