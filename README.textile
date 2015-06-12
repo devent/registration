@@ -8,6 +8,10 @@ Command line application to generate the registration key and code. To start the
 bin/linux/registrationcli.sh
 </pre>
 
+h2. Limitations
+
+The application is not designed as a Digital Rights Management (DRM) software. It is just a simple method for registration an application for a particular user. 
+
 h2. Debug
 
 A version for debug purpose is in the same directory as the start script and is run in the same matter, i.e.:

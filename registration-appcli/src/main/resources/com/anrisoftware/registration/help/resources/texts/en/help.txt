@@ -14,6 +14,13 @@ script can be run from anywhere, i.e.:
 bin/linux/registrationcli.sh
 ```
 
+Limitations
+-----------
+
+The application is not designed as a Digital Rights Management (DRM)
+software. It is just a simple method for registration an application for
+a particular user.
+
 Debug
 -----
 
