@@ -1,0 +1,52 @@
+h1. Registration Command Line Application
+
+h2. Description
+
+Command line application to generate the registration key and code. To start the application there are scripts installed in the @bin/@ directory. For Linux it is the @bin/linux/registrationcli.sh@ script, for Windows it is the @bin/windows/registrationcli.bat@ script. The script can be run from anywhere, i.e.:
+
+<pre lang="bash">
+bin/linux/registrationcli.sh
+</pre>
+
+h2. Debug
+
+A version for debug purpose is in the same directory as the start script and is run in the same matter, i.e.:
+
+<pre lang="bash">
+bin/linux/registrationcli-debug.sh
+</pre>
+
+h2. Synopsis
+
+<pre lang="bash">
+registrationcli.sh [-name NAME] [-email EMAIL]
+registrationcli.sh -key KEY
+registrationcli.sh -help
+</pre>
+
+h2. Description
+
+The program have two modes. First, to generate the registration code. Optionally, the user name and the user email address can be specified. Second, to generate the registration code from a specified key.
+
+h2. Usage
+
+Without any arguments the application will generate the registration code. Optionally, the user name and the user email address can be specified.
+
+<pre lang="bash">
+registrationcli.sh
+PTKB-BTKU-CWQF-IEGX
+</pre>
+
+The command line argument @-code@ will generate the registration code for the specified registration key.
+
+<pre lang="bash">
+registrationcli.sh -key PTKB-BTKU-CWQF-IEGX
+3703370522173961
+</pre>
+
+The command line argument @-help@ will print out this help.
+
+<pre lang="bash">
+registrationcli.sh -help
+</pre>
+
