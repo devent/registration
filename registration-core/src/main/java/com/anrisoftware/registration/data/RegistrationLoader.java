@@ -21,6 +21,7 @@ package com.anrisoftware.registration.data;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 
 /**
@@ -48,7 +49,28 @@ public class RegistrationLoader {
     public Registration load(File file) throws IOException,
             ClassNotFoundException {
         FileInputStream fstream = new FileInputStream(file);
-        ObjectInputStream stream = new ObjectInputStream(fstream);
+        return load(fstream);
+    }
+
+    /**
+     * Loads the registration from the specified stream.
+     *
+     * @param input
+     *            the {@link InputStream}.
+     *
+     * @return the loaded {@link Registration}.
+     *
+     * @throws IOException
+     *             if there was an error reading the file.
+     *
+     * @throws ClassNotFoundException
+     *             if the {@link Registration} class was not found.
+     *
+     * @since 1.1
+     */
+    public Registration load(InputStream input) throws IOException,
+            ClassNotFoundException {
+        ObjectInputStream stream = new ObjectInputStream(input);
         Registration registration = (Registration) stream.readObject();
         stream.close();
         return registration;

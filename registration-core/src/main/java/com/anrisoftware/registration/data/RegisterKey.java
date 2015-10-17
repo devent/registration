@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 
 import javax.inject.Inject;
 
@@ -37,41 +39,14 @@ import com.google.inject.assistedinject.Assisted;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 1.0
  */
-public class RegisterKey implements Registration {
+@SuppressWarnings("serial")
+public class RegisterKey implements Registration, Serializable {
 
     private final Registration registration;
-
-    public int daysDemo;
 
     @Inject
     RegisterKey(@Assisted Registration registration) {
         this.registration = registration;
-    }
-
-    /**
-     * Sets the days for the demo.
-     *
-     * @param daysDemo
-     *            sets the {@link Integer} days.
-     */
-    public void setDaysDemo(int daysDemo) {
-        this.daysDemo = daysDemo;
-    }
-
-    /**
-     * Saves the registration into a file.
-     *
-     * @param file
-     *            the {@link File} file.
-     *
-     * @throws IOException
-     *             if there was an error saving the file.
-     */
-    public void save(File file) throws IOException {
-        FileOutputStream fstream = new FileOutputStream(file);
-        ObjectOutputStream stream = new ObjectOutputStream(fstream);
-        stream.writeObject(registration);
-        stream.close();
     }
 
     /**
@@ -85,7 +60,48 @@ public class RegisterKey implements Registration {
     public long getDaysLeftDemo(DateTime date) {
         DateTime installDate = registration.getInstallDate();
         long days = new Duration(installDate, date).getStandardDays();
-        return daysDemo - days;
+        return getDaysDemo() - days;
+    }
+
+    /**
+     * Saves the registration into a file.
+     *
+     * @param file
+     *            the {@link File} file.
+     *
+     * @throws IOException
+     *             if there was an error saving the file.
+     */
+    public void save(File file) throws IOException {
+        FileOutputStream fstream = new FileOutputStream(file);
+        save(fstream);
+    }
+
+    /**
+     * Saves the registration into a stream.
+     *
+     * @param output
+     *            the {@link OutputStream} file.
+     *
+     * @throws IOException
+     *             if there was an error saving the file.
+     *
+     * @since 1.1
+     */
+    public void save(OutputStream output) throws IOException {
+        ObjectOutputStream stream = new ObjectOutputStream(output);
+        stream.writeObject(registration);
+        stream.flush();
+    }
+
+    @Override
+    public void setDaysDemo(int daysDemo) {
+        registration.setDaysDemo(daysDemo);
+    }
+
+    @Override
+    public int getDaysDemo() {
+        return registration.getDaysDemo();
     }
 
     @Override
@@ -140,7 +156,8 @@ public class RegisterKey implements Registration {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append(registration).toString();
+        return new ToStringBuilder(this).append(registration.toString())
+                .toString();
     }
 
 }

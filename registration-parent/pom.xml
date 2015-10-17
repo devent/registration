@@ -13,7 +13,7 @@
 	<groupId>com.anrisoftware.registration</groupId>
 	<artifactId>registration-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>Registration :: Parent</name>
 	<url>https://anrisoftware.com/projects/projects/registration-parent</url>
 	<description>Manages the dependencies for the modules.</description>

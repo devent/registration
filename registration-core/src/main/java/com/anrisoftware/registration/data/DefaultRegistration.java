@@ -32,6 +32,8 @@ import org.joda.time.DateTime;
 @SuppressWarnings("serial")
 public final class DefaultRegistration implements Registration, Serializable {
 
+    private int daysDemo;
+
     private DateTime registerDate;
 
     private DateTime installDate;
@@ -42,99 +44,64 @@ public final class DefaultRegistration implements Registration, Serializable {
 
     private String key;
 
-    /**
-     * Sets the registration date.
-     *
-     * @param registerDate
-     *            the {@link DateTime} date.
-     */
+    @Override
+    public void setDaysDemo(int daysDemo) {
+        this.daysDemo = daysDemo;
+    }
+
+    @Override
+    public int getDaysDemo() {
+        return daysDemo;
+    }
+
+    @Override
     public void setRegisterDate(DateTime registerDate) {
         this.registerDate = registerDate;
     }
 
-    /**
-     * The registration date.
-     *
-     * @return the {@link DateTime} date.
-     */
+    @Override
     public DateTime getRegisterDate() {
         return registerDate;
     }
 
-    /**
-     * Sets the install date.
-     *
-     * @param installDate
-     *            the {@link DateTime} date.
-     */
+    @Override
     public void setInstallDate(DateTime installDate) {
         this.installDate = installDate;
     }
 
-    /**
-     * The install date.
-     *
-     * @return the {@link DateTime} date.
-     */
+    @Override
     public DateTime getInstallDate() {
         return installDate;
     }
 
-    /**
-     * Sets the registration code.
-     *
-     * @param code
-     *            the code as a {@link Byte} array.
-     */
+    @Override
     public void setCode(byte[] code) {
         byte[] value = new byte[code.length];
         System.arraycopy(code, 0, value, 0, code.length);
         this.code = value;
     }
 
-    /**
-     * Returns the registration code.
-     *
-     * @return the code as a {@link Byte} array.
-     */
+    @Override
     public byte[] getCode() {
         return code;
     }
 
-    /**
-     * Returns the registration name.
-     *
-     * @param name
-     *            the {@link String} name.
-     */
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * Sets the registration name.
-     *
-     * @return the {@link String} name.
-     */
+    @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * Sets the registration key.
-     *
-     * @param key
-     *            the {@link String} key.
-     */
+    @Override
     public void setKey(String key) {
         this.key = key;
     }
 
-    /**
-     * Returns the registration key.
-     *
-     * @return the {@link String} key.
-     */
+    @Override
     public String getKey() {
         return key;
     }

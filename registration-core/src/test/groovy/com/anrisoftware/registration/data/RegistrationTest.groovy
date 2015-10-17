@@ -20,6 +20,7 @@ package com.anrisoftware.registration.data
 
 import static com.anrisoftware.globalpom.utils.TestUtils.*
 import static com.google.inject.Guice.createInjector
+import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 
 import org.joda.time.DateTime
@@ -35,6 +36,7 @@ import com.google.inject.Injector
  * @since 1.0
  */
 @Slf4j
+@CompileStatic
 class RegistrationTest {
 
     @Test
@@ -49,7 +51,7 @@ class RegistrationTest {
         registrationA.name = name
         registrationA.key = key
 
-        def registrationB = reserialize registrationA
+        Registration registrationB = reserialize(registrationA) as Registration
         assert registrationB.registerDate == registrationA.registerDate
         assert registrationB.installDate == registrationA.installDate
         assert registrationB.code == registrationA.code
@@ -77,10 +79,10 @@ class RegistrationTest {
             [daysDemo: 30, date: new DateTime(2000, 1, 20, 0, 0, 0), daysLeft: 11],
             [daysDemo: 30, date: new DateTime(2000, 2, 1, 0, 0, 0), daysLeft: -1],
         ]
-        cases.eachWithIndex { it, i ->
+        cases.eachWithIndex { Map it, i ->
             log.info "{}.test case: {}", i, it
-            registerKey.setDaysDemo it.daysDemo
-            assert registerKey.getDaysLeftDemo(it.date) == it.daysLeft
+            registerKey.setDaysDemo it.daysDemo as int
+            assert registerKey.getDaysLeftDemo(it.date as DateTime) == it.daysLeft as int
         }
     }
 

@@ -29,6 +29,25 @@ import org.joda.time.DateTime;
 public interface Registration {
 
     /**
+     * Sets the days for the demo.
+     *
+     * @param daysDemo
+     *            sets the {@link Integer} days.
+     *
+     * @since 1.1
+     */
+    void setDaysDemo(int daysDemo);
+
+    /**
+     * Returns the days for the demo.
+     *
+     * @return the {@link Integer} days.
+     *
+     * @since 1.1
+     */
+    int getDaysDemo();
+
+    /**
      * Sets the registration date.
      *
      * @param registerDate
