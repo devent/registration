@@ -12,7 +12,7 @@
 
 	<groupId>com.anrisoftware.registration</groupId>
 	<artifactId>registration-appcli-install</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>Registration :: C/L Application Installation</name>
 	<description>Packages the registration command line application for deployment and installation.</description>
 	<inceptionYear>2015</inceptionYear>
@@ -25,7 +25,7 @@
 		<project.custom.app.name>Registration Command Line Application</project.custom.app.name>
 		<project.custom.app.description>Generates the registration key and code.</project.custom.app.description>
 		<project.custom.app.path>Registrationcli</project.custom.app.path>
-		<project.custom.app.version>1.0</project.custom.app.version>
+		<project.custom.app.version>1.1</project.custom.app.version>
 		<project.custom.app.author.name>Erwin Müller</project.custom.app.author.name>
 		<project.custom.app.author.email>erwin.mueller@deventm.org</project.custom.app.author.email>
 		<project.custom.app.mainclass>com.anrisoftware.registration.app.Starter</project.custom.app.mainclass>
@@ -36,10 +36,10 @@
 		<project.custom.app.linuxdebugbin>registrationcli-debug.sh</project.custom.app.linuxdebugbin>
 		<project.custom.app.windowsbin>registrationcli.bat</project.custom.app.windowsbin>
 		<project.custom.app.windowsdebugbin>registrationcli-debug.bat</project.custom.app.windowsdebugbin>
-		<project.custom.launch4j.install.internalname>registration-appcli-install-1.0.jar</project.custom.launch4j.install.internalname>
-		<project.custom.launch4j.install.originalfilename>registration-appcli-install-1.0.exe</project.custom.launch4j.install.originalfilename>
-		<project.custom.launch4j.app.internalname>registration-appcli-install-1.0-single-jar.jar</project.custom.launch4j.app.internalname>
-		<project.custom.launch4j.app.originalfilename>registration-appcli-install-1.0-single-jar.exe</project.custom.launch4j.app.originalfilename>
+		<project.custom.launch4j.install.internalname>registration-appcli-install-1.1.jar</project.custom.launch4j.install.internalname>
+		<project.custom.launch4j.install.originalfilename>registration-appcli-install-1.1.exe</project.custom.launch4j.install.originalfilename>
+		<project.custom.launch4j.app.internalname>registration-appcli-install-1.1-single-jar.jar</project.custom.launch4j.app.internalname>
+		<project.custom.launch4j.app.originalfilename>registration-appcli-install-1.1-single-jar.exe</project.custom.launch4j.app.originalfilename>
 	</properties>
 
 	<developers>
